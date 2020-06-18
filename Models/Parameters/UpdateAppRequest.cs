@@ -13,8 +13,8 @@ namespace AuthedSharp.Models.Parameters {
 		}
 
 		public enum AppField {
-			IsFree,
-			IsLocked
+			isFree,
+			isLocked
 		}
 	}
 

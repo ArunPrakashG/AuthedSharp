@@ -30,6 +30,17 @@ namespace AuthedSharp {
 			};
 		}
 
+		internal Requester() {
+			ClientHandler = new HttpClientHandler() {
+				AllowAutoRedirect = false
+			};
+
+			Client = new HttpClient(ClientHandler, false) {
+				BaseAddress = new Uri(BASE_ADDRESS),
+				Timeout = TimeSpan.FromSeconds(30)
+			};
+		}
+
 		/// <summary>
 		/// Sends a <see cref="HttpRequestMessage"/> request and returns result object.
 		/// </summary>
