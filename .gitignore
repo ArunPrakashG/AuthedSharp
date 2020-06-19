@@ -268,3 +268,4 @@ __pycache__/
 *.pyc
 *.bin
 *.db
+.vs/AuthedSharp/v16/.suo

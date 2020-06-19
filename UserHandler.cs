@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 namespace AuthedSharp {
 	public sealed class UserHandler {
 		private readonly Requester Requester;
+		private readonly bool SaveSession;
 
-		internal UserHandler(Requester _requester) => Requester = _requester;
+		internal UserHandler(Requester _requester, bool _saveSession) {
+			Requester = _requester;
+			SaveSession = _saveSession;
+		}
 
 		public async Task<LoginResponse> LoginAsync(LoginRequest request) {
 			if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password)) {

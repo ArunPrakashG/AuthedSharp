@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 namespace AuthedSharp {
 	public sealed class ApplicationHandler {
 		private readonly Requester Requester;
+		private readonly bool SaveSession;
 
-		internal ApplicationHandler(Requester _requester) => Requester = _requester;
+		internal ApplicationHandler(Requester _requester, bool _saveSession) {
+			Requester = _requester;
+			SaveSession = _saveSession;
+		}
 
 		public async Task<VerifyResponse> VerifyAsync(VerifyRequest request) {
 			if (string.IsNullOrEmpty(request.AccessToken) || string.IsNullOrEmpty(request.ApplicationID)) {
@@ -39,7 +43,6 @@ namespace AuthedSharp {
 				});
 
 				requestMsg.Headers.Add("Session", request.CurrentSession);
-
 				return await Requester.InternalRequestAsObject<UpdateApplicationResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
