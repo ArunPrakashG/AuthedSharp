@@ -66,7 +66,7 @@ namespace AuthedSharp {
 			}
 		}
 
-		public async Task<GrandMembershipResponse> RenewAsync(GrandMembershipRequest request) {
+		public async Task<GrandMembershipResponse> GrandMembershipAsync(GrandMembershipRequest request) {
 			if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.MembershipID)) {
 				throw new ArgumentNullException(nameof(request));
 			}
@@ -83,7 +83,7 @@ namespace AuthedSharp {
 			}
 		}
 
-		public async Task<UpdateUserResponse> UpdateUser(UpdateUserFieldRequest request) {
+		public async Task<UpdateUserResponse> UpdateUserAsync(UpdateUserFieldRequest request) {
 			if (string.IsNullOrEmpty(request.Session) || string.IsNullOrEmpty(request.UserSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
@@ -101,7 +101,7 @@ namespace AuthedSharp {
 			}
 		}
 
-		public async Task<RenewSessionResponse> RenewSession(RenewUserSessionRequest request) {
+		public async Task<RenewSessionResponse> RenewUserSessionAsync(RenewUserSessionRequest request) {
 			if (string.IsNullOrEmpty(request.Session) || string.IsNullOrEmpty(request.UserSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
@@ -117,7 +117,7 @@ namespace AuthedSharp {
 			}
 		}
 
-		public async Task<GetUserResponse> GetUser(GetUserRequest request) {
+		public async Task<GetUserResponse> GetUserAsync(GetUserRequest request) {
 			if (string.IsNullOrEmpty(request.Session) || string.IsNullOrEmpty(request.UserSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
