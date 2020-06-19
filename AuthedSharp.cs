@@ -1,10 +1,5 @@
-using AuthedSharp.Models.Parameters;
-using AuthedSharp.Models.Responses.AppResponses;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace AuthedSharp {
 	public class AuthedSharp {
@@ -25,7 +20,7 @@ namespace AuthedSharp {
 		}
 
 		public AuthedSharp() {
-			Requester = new Requester(null, null);
+			Requester = new Requester();
 			App = new ApplicationHandler(Requester);
 			User = new UserHandler(Requester);
 		}

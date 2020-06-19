@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace AuthedSharp.Models.Parameters {
-	public struct RegisterRequest {
+	public struct RenewRequest {
 		public readonly string Email;
-		public readonly string Password;
 		public readonly string LicenseCode;
 		public readonly string Session;
 
-		public RegisterRequest(string _email, string _password, string _licenseCode, string _session) {
+		public RenewRequest(string _email, string _licenseCode, string _session) {
 			Email = _email;
-			Password = _password;
 			LicenseCode = _licenseCode;
 			Session = _session;
 		}
