@@ -7,13 +7,13 @@ namespace AuthedSharp.Models.Parameters {
 		public readonly string Email;
 		public readonly string Password;
 		public readonly string LicenseCode;
-		public readonly string Session;
+		public readonly string ApplicationSession;
 
 		public RegisterRequest(string _email, string _password, string _licenseCode, string _session) {
 			Email = _email;
 			Password = _password;
 			LicenseCode = _licenseCode;
-			Session = _session;
+			ApplicationSession = _session;
 		}
 	}
 }

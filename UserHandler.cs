@@ -45,7 +45,7 @@ namespace AuthedSharp {
 					{ "licenseCode", request.LicenseCode }
 				});
 
-				requestMsg.Headers.Add("session", request.Session);
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<RegisterResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
@@ -62,7 +62,7 @@ namespace AuthedSharp {
 					{ "licenseCode", request.LicenseCode }
 				});
 
-				requestMsg.Headers.Add("session", request.Session);
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<RenewResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
@@ -79,13 +79,13 @@ namespace AuthedSharp {
 					{ "membershipId", request.MembershipID }
 				});
 
-				requestMsg.Headers.Add("session", request.Session);
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<GrandMembershipResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
 
 		public async Task<UpdateUserResponse> UpdateUserAsync(UpdateUserFieldRequest request) {
-			if (string.IsNullOrEmpty(request.Session) || string.IsNullOrEmpty(request.UserSession)) {
+			if (string.IsNullOrEmpty(request.ApplicationSession) || string.IsNullOrEmpty(request.UserSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
 
@@ -97,13 +97,13 @@ namespace AuthedSharp {
 					{ "value", request.FieldValue }
 				});
 
-				requestMsg.Headers.Add("session", request.Session);
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<UpdateUserResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
 
 		public async Task<RenewSessionResponse> RenewUserSessionAsync(RenewUserSessionRequest request) {
-			if (string.IsNullOrEmpty(request.Session) || string.IsNullOrEmpty(request.UserSession)) {
+			if (string.IsNullOrEmpty(request.ApplicationSession) || string.IsNullOrEmpty(request.UserSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
 
@@ -113,13 +113,13 @@ namespace AuthedSharp {
 					{ "userSession", request.UserSession }
 				});
 
-				requestMsg.Headers.Add("session", request.Session);
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<RenewSessionResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
 
 		public async Task<GetUserResponse> GetUserAsync(GetUserRequest request) {
-			if (string.IsNullOrEmpty(request.Session) || string.IsNullOrEmpty(request.UserSession)) {
+			if (string.IsNullOrEmpty(request.ApplicationSession) || string.IsNullOrEmpty(request.UserSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
 
@@ -129,7 +129,7 @@ namespace AuthedSharp {
 					{ "userSession", request.UserSession }
 				});
 
-				requestMsg.Headers.Add("session", request.Session);
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<GetUserResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
