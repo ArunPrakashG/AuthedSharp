@@ -27,6 +27,7 @@ namespace AuthedSharp {
 					{ "password", request.Password }
 				});
 
+				requestMsg.Headers.Add("session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<LoginResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}

@@ -9,7 +9,7 @@ namespace AuthedSharp.Models.Parameters {
 		public readonly int Level;
 		public readonly int Time;
 		public readonly int Amount;
-		public readonly string Session;
+		public readonly string ApplicationSession;
 
 		public GenerateLicenseRequest(string _appSecret, string _licensePrefix, int _level, int _time, int _amount, string _session) {
 			AppSecret = _appSecret;
@@ -17,7 +17,7 @@ namespace AuthedSharp.Models.Parameters {
 			Level = _level;
 			Time = _time;
 			Amount = _amount;
-			Session = _session;
+			ApplicationSession = _session;
 		}
 	}
 }

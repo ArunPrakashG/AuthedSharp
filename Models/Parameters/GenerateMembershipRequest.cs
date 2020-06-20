@@ -8,13 +8,13 @@ namespace AuthedSharp.Models.Parameters {
 		public readonly string Name;
 		public readonly int Time;
 		public readonly int Level;
-		public readonly string Session;
+		public readonly string ApplicationSession;
 
 		public GenerateMembershipRequest(string _appSecret, string _name, int _level, int _time, string _session) {
 			AppSecret = _appSecret;			
 			Level = _level;
 			Time = _time;
-			Session = _session;
+			ApplicationSession = _session;
 			Name = _name;
 		}
 	}

@@ -21,12 +21,12 @@ namespace AuthedSharp.Models.Parameters {
 	public struct UpdateAppRequest {
 		public readonly string AppSecret;
 		public readonly UpdateField FieldInfo;
-		public readonly string CurrentSession;
+		public readonly string ApplicationSession;
 
 		public UpdateAppRequest(string _appSecret, UpdateField _field, string _session) {
 			AppSecret = _appSecret;
 			FieldInfo = _field;
-			CurrentSession = _session;
+			ApplicationSession = _session;
 		}
 	}
 }

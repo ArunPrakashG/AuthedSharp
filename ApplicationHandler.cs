@@ -31,7 +31,7 @@ namespace AuthedSharp {
 		}
 
 		public async Task<UpdateApplicationResponse> UpdateApplicationValuesAsync(UpdateAppRequest request) {
-			if (string.IsNullOrEmpty(request.AppSecret) || string.IsNullOrEmpty(request.CurrentSession)) {
+			if (string.IsNullOrEmpty(request.AppSecret) || string.IsNullOrEmpty(request.ApplicationSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
 
@@ -42,13 +42,13 @@ namespace AuthedSharp {
 					{ "value", request.FieldInfo.Value.ToString() }
 				});
 
-				requestMsg.Headers.Add("Session", request.CurrentSession);
+				requestMsg.Headers.Add("Session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<UpdateApplicationResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
 
 		public async Task<GenerateLicenseResponse> GenerateLicenseAsync(GenerateLicenseRequest request) {
-			if (string.IsNullOrEmpty(request.AppSecret) || string.IsNullOrEmpty(request.Session)) {
+			if (string.IsNullOrEmpty(request.AppSecret) || string.IsNullOrEmpty(request.ApplicationSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
 
@@ -62,13 +62,13 @@ namespace AuthedSharp {
 					{ "amount", request.Amount.ToString() }
 				});
 
-				requestMsg.Headers.Add("Session", request.Session);
+				requestMsg.Headers.Add("Session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<GenerateLicenseResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
 
 		public async Task<GenerateMembershipResponse> GenerateLicenseAsync(GenerateMembershipRequest request) {
-			if (string.IsNullOrEmpty(request.AppSecret) || string.IsNullOrEmpty(request.Session)) {
+			if (string.IsNullOrEmpty(request.AppSecret) || string.IsNullOrEmpty(request.ApplicationSession)) {
 				throw new ArgumentNullException(nameof(request));
 			}
 
@@ -81,7 +81,7 @@ namespace AuthedSharp {
 					{ "time", request.Time.ToString() }
 				});
 
-				requestMsg.Headers.Add("Session", request.Session);
+				requestMsg.Headers.Add("Session", request.ApplicationSession);
 				return await Requester.InternalRequestAsObject<GenerateMembershipResponse>(requestMsg, 1).ConfigureAwait(false);
 			}
 		}
