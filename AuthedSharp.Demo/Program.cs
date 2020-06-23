@@ -1,20 +1,16 @@
 using AuthedSharp.Models.Parameters;
-using AuthedSharp.Models.Responses.UserResponses;
 using System;
 using System.Threading.Tasks;
 
-namespace AuthedSharp.Demo
-{
-	class Program
-	{
+namespace AuthedSharp.Demo {
+	internal class Program {
 		private static readonly Authed Auth = new Authed();
 		private static string APP_ACCESS_TOKEN;
 		private static string APP_ID;
 		private static string ApplicationSession;
 		private static string UserSession;
 
-		static async Task Main(string[] args)
-		{
+		private static async Task Main(string[] args) {
 			Console.WriteLine("Verifying application...");
 			Console.WriteLine("Enter Application access token: ");
 			APP_ACCESS_TOKEN = Console.ReadLine();
@@ -23,7 +19,7 @@ namespace AuthedSharp.Demo
 
 			var verifyResponse = await Auth.GetAppEndpoint().VerifyAsync(new VerifyRequest(APP_ID, APP_ACCESS_TOKEN));
 
-			if(verifyResponse.ResponseCode != 200) {
+			if (verifyResponse.ResponseCode != 200) {
 				Console.WriteLine("ERROR: " + verifyResponse.Message);
 				Console.ReadKey();
 			}

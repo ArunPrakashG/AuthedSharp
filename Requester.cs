@@ -11,12 +11,13 @@ namespace AuthedSharp {
 		private const string BASE_ADDRESS = "https://api.authed.io/app/";
 		private const int MAX_TRIES = 3;
 		private static readonly SemaphoreSlim Sync = new SemaphoreSlim(1, 1);
-		private readonly int DELAY_BETWEEN_REQUESTS = 1;
-		private readonly int DELAY_BETWEEN_FAILED_REQUESTS = 10;
+		private readonly int DELAY_BETWEEN_REQUESTS = 1; // in secs
+		private readonly int DELAY_BETWEEN_FAILED_REQUESTS = 10; // in secs
 		private readonly HttpClientHandler ClientHandler;
 		private readonly HttpClient Client;
+		private readonly bool ShouldRetry = false;
 
-		internal Requester(HttpClientHandler? _clientHandler, IWebProxy? _proxy) {
+		internal Requester(HttpClientHandler? _clientHandler, IWebProxy? _proxy, bool _shouldRetry = false) {
 			ClientHandler = _clientHandler ?? new HttpClientHandler() {
 				AllowAutoRedirect = false,
 				Proxy = _proxy,
@@ -27,9 +28,11 @@ namespace AuthedSharp {
 				BaseAddress = new Uri(BASE_ADDRESS),
 				Timeout = TimeSpan.FromSeconds(30)
 			};
+
+			ShouldRetry = _shouldRetry;
 		}
 
-		internal Requester() {
+		internal Requester(bool _shouldRetry = false) {
 			ClientHandler = new HttpClientHandler() {
 				AllowAutoRedirect = false
 			};
@@ -38,6 +41,8 @@ namespace AuthedSharp {
 				BaseAddress = new Uri(BASE_ADDRESS),
 				Timeout = TimeSpan.FromSeconds(30)
 			};
+
+			ShouldRetry = _shouldRetry;
 		}
 
 		/// <summary>
@@ -47,17 +52,17 @@ namespace AuthedSharp {
 		/// <param name="maxTries">The maximum number of tries before the request is considered as a fail.</param>
 		/// <typeparam name="T">The type of result object, used to deserialize the result json.</typeparam>
 		/// <returns>The result object.</returns>
-		public async Task<T> InternalRequestAsObject<T>(
-			HttpRequestMessage request, int maxTries = MAX_TRIES) {
+		public async Task<T> InternalRequestAsObject<T>(HttpRequestMessage request, int maxTries = MAX_TRIES) {
 			if (request == null) {
 				return default;
 			}
 
 			bool success = false;
+
 			for (int i = 0; i < maxTries; i++) {
 				try {
-					using (HttpResponseMessage response = await ExecuteRequest(async () => await Client.SendAsync(request).ConfigureAwait(false)).ConfigureAwait(false)) {
-						if (!response.IsSuccessStatusCode) {
+					using (HttpResponseMessage response = await ExecuteRequest(async () => await Client.SendAsync(request).ConfigureAwait(false)).ConfigureAwait(false)) {						
+						if (!response.IsSuccessStatusCode) {							
 							continue;
 						}
 
